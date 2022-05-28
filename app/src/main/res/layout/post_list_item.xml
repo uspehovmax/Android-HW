@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/common_size"
         android:gravity="center"
+        android:text="@string/viewsNumber"
         android:textAlignment="center"
         android:textSize="12sp"
         android:textStyle="bold"
@@ -27,7 +28,8 @@
         android:src="@drawable/ic_view_foreground_36"
         app:layout_constraintEnd_toStartOf="@+id/viewsNumber"
 
-        app:layout_constraintTop_toBottomOf="@id/bottomBarrier" />
+        app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/share"
@@ -36,9 +38,8 @@
         android:layout_marginStart="36dp"
         android:background="#FFFFFF"
         android:src="@drawable/ic_share_share_36"
-        app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
         app:layout_constraintStart_toEndOf="@id/likesNumber"
-
+        app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
         tools:layout_editor_absoluteX="122dp" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -47,6 +48,7 @@
         android:layout_height="@dimen/common_size"
         android:layout_marginStart="4dp"
         android:gravity="center"
+        android:text="@string/shareNumber"
         android:textAlignment="center"
         android:textSize="12sp"
         android:textStyle="bold"
@@ -61,7 +63,8 @@
         android:contentDescription="@string/avatar_description"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@tools:sample/avatars"
+        app:srcCompat="@drawable/ic_launcher_foreground"
+        tools:src="@tools:sample/avatars"
         tools:srcCompat="@drawable/ic_launcher_foreground" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -69,9 +72,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/common_spacing"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="24dp"
         android:ellipsize="end"
         android:singleLine="true"
+        android:text="@string/AuthorName"
+        android:textSize="14sp"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@id/date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/avatar"
@@ -84,6 +90,7 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:singleLine="true"
+        android:text="@string/date"
         app:layout_constraintBottom_toBottomOf="@id/avatar"
         app:layout_constraintEnd_toStartOf="@id/options"
         app:layout_constraintStart_toStartOf="@id/authorName"
@@ -113,12 +120,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:text="@string/textPost"
         app:barrierMargin="@dimen/common_size"
+
+        app:layout_constraintBottom_toTopOf="@id/bottomBarrier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerBarrier"
-        app:layout_constraintBottom_toTopOf="@id/bottomBarrier"
-        tools:text="@tools:sample/lorem/random" />
+        app:layout_constraintTop_toBottomOf="@id/headerBarrier" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/bottomBarrier"
@@ -133,6 +141,7 @@
         android:layout_height="@dimen/common_size"
         android:layout_marginStart="4dp"
         android:gravity="center"
+        android:text="@string/likesNumber"
         android:textAlignment="center"
         android:textSize="12sp"
         android:textStyle="bold"
