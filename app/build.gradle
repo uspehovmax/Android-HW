@@ -12,6 +12,16 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
+
+    }
+
+    buildFeatures {
+        viewBinding true
+
+    }
+
+    viewBinding {
+        enabled = true
     }
 
     buildTypes {

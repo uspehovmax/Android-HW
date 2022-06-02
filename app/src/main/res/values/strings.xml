@@ -2,12 +2,21 @@
     <string name="app_name">NMedia</string>
     <string name="greeting">NMedia!</string>
     <string name="avatar_description">Author avatar</string>
-    <string name="textPost"><![CDATA[Привет - это новая Нетология!\nОбратите внимание на блок с количеством просмотров. С ним есть небольшая проблема (поскольку он расположен справа). Если количество просмотров вырастет, например, до 500, то есть целых два варианта:
-Отталкиваться от текста (т.е. установить фиксированное расстояние от текста до границы родителя, а саму иконку приклеить к границе текста)
-Оставить достаточное количество места, чтобы уместилось и 500 и 1К, тогда на всех карточках положение этого блока будет одинаковым ]]></string>
+    <string name="textPost"><![CDATA[Android data binding generates a Binding class
+    based on this layout.
+    This class holds all the bindings from the layout properties,
+    i.e., the defined variable to the corresponding views.
+    It also provides generated setters for your data elements from the layout.
+    The name of the generated class is based on the name of the layout file.
+    This name is converted to Pascal case and the Binding suffix is added to it.
+    For example, if the layout file is called activity_main.xml,
+    the generate class is called ActivityMainBinding.
+    You can inflate the layout and connect your model via this class or the
+    DataBindingUtil class. ]]></string>
     <string name="likesNumber" translatable="false">2150</string>
     <string name="shareNumber" translatable="false">354</string>
     <string name="viewsNumber" translatable="false">65897</string>
     <string name="AuthorName">Author</string>
     <string name="date" translatable="false">24.05.2022</string>
+
 </resources>
