@@ -13,36 +13,11 @@
         android:layout_height="match_parent"
         android:padding="@dimen/common_spacing">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="123dp"
-            android:layout_height="54dp"
-            android:layout_marginEnd="60dp"
-            android:text="Введите число share и click для проверки"
-            app:layout_constraintBottom_toTopOf="@+id/editShareNumber"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <EditText
-            android:id="@+id/editShareNumber"
-            android:layout_width="83dp"
-            android:layout_height="54dp"
-            android:layout_marginBottom="216dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:inputType="number"
-            android:text="5999999"
-            android:textSize="16sp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.661"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:visibility="visible" />
-
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/viewsNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/common_size"
+            android:layout_width="44dp"
+            android:layout_height="33dp"
+            android:layout_marginEnd="24dp"
             android:gravity="center"
             android:text="@string/viewsNumber"
             android:textAlignment="center"
@@ -50,13 +25,13 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/postText"
-            tools:text="3999" />
+            tools:text="7999" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/views"
             android:layout_width="@dimen/common_size"
             android:layout_height="@dimen/common_size"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="20dp"
             android:background="#FFFFFF"
             android:src="@drawable/ic_view_foreground_36"
             app:layout_constraintEnd_toStartOf="@+id/viewsNumber"
@@ -86,7 +61,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/share"
             app:layout_constraintTop_toBottomOf="@+id/postText"
-            tools:text="5000" />
+            tools:text="888888" />
 
         <ImageView
             android:id="@+id/avatar"
@@ -182,7 +157,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/likesButton"
             app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
-            tools:text="200" />
+            tools:text="111" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/likesButton"
@@ -192,31 +167,6 @@
             android:src="@drawable/ic_baseline_favorite_24"
             app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
             tools:layout_editor_absoluteX="8dp" />
-
-        <EditText
-            android:id="@+id/editLikeNumber"
-            android:layout_width="83dp"
-            android:layout_height="54dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginBottom="208dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:inputType="number"
-            android:text="9999"
-            android:textSize="16sp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:visibility="visible" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="135dp"
-            android:layout_height="57dp"
-            android:layout_marginStart="24dp"
-            android:text="Введите число лайков  и click для проверки"
-            app:layout_constraintBottom_toTopOf="@+id/editLikeNumber"
-            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
