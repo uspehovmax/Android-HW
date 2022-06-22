@@ -13,9 +13,9 @@
     the generate class is called ActivityMainBinding.
     You can inflate the layout and connect your model via this class or the
     DataBindingUtil class. ]]></string>
-    <string name="likesNumber" translatable="false">2150</string>
-    <string name="shareNumber" translatable="false">354</string>
-    <string name="viewsNumber" translatable="false">65897</string>
+    <string name="likesNumber" translatable="false">999</string>
+    <string name="shareNumber" translatable="false">666666</string>
+    <string name="viewsNumber" translatable="false">499999</string>
     <string name="AuthorName">Author</string>
     <string name="date" translatable="false">24.05.2022</string>
 
