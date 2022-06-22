@@ -1,45 +1,50 @@
 package ru.netology.nmedia.data
 
-import androidx.annotation.DrawableRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.netology.nmedia.MainActivity
-import ru.netology.nmedia.R
-import ru.netology.nmedia.data.PostRepository
-import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
 
 class InMemoryPostRepository : PostRepository {
 
-    private var post = Post(
-        id = 0L,
-        author = "Нетология. Университет...",
-        content = "Привет! Это новая Нетология...",
-        likes = 999,
-        published = "27.05.2022",
-        likedByMe = false,
-        shareCount = 999999,
-        viewsCount = 19999
+    private val posts
+        get() = checkNotNull(dataPost.value) {
+            "Data value should not be null"
+        }
+
+    override val dataPost = MutableLiveData(
+        List(20) { index ->
+            Post(
+                id = index + 1L,
+                author = "Нетология. Университет...",
+                content = "Пост с номером $index",
+                likes = index * 3,
+                published = "27.05.2025",
+                likedByMe = false,
+                shareCount = index * 5,
+                viewsCount = index * 7
+            )
+        }
     )
 
-    private val data = MutableLiveData(post)
+    override fun getAll(): LiveData<List<Post>> = dataPost
 
-    override fun get(): LiveData<Post> = data
-
-    override fun like() {
-        post = post.copy(likedByMe = !post.likedByMe)
-        post = post.copy(likes = likeCounter(post))
-        data.value = post
+    override fun likeById(post: Post) {
+        dataPost.value = posts.map {
+            if (it.id != post.id) it
+            else it.copy(likedByMe = !it.likedByMe)
+        }
     }
 
-    override fun share() {
-        post = post.copy(shareCount = post.shareCount + 1)
-        data.value = post
+    override fun share(shareCount: Int) {
+        dataPost.value = posts.map {
+            it.copy(shareCount = it.shareCount + 1)
+        }
     }
 
-    override fun views() {
-        post = post.copy(viewsCount = post.viewsCount + 1)
-        data.value = post
+    override fun views(viewsCount: Int) {
+        dataPost.value = posts.map {
+            it.copy(viewsCount = it.viewsCount + 1)
+        }
     }
 
     private fun likeCounter(post: Post): Int {
@@ -52,3 +57,19 @@ class InMemoryPostRepository : PostRepository {
     }
 
 }
+/*
+    override val dataPost = MutableLiveData(
+        List(10) { index ->
+            Post(
+                id = index + 1L,
+                author = "Нетология. Университет...",
+                content = "Привет! Это новая Нетология...$index",
+                likes = 555,
+                published = "27.05.2025",
+                likedByMe = false,
+                shareCount = 1111999,
+                viewsCount = 444669
+            )
+        }
+    )
+ */
