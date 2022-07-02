@@ -8,13 +8,8 @@ import ru.netology.nmedia.dto.Post
 class PostViewModel : ViewModel() {
 
     private val repository: PostRepository = InMemoryPostRepository()
-    val data = repository.getAll()  // из презентации
-    //val data by repository::dataPost
-
-    fun likeById(post: Post) = repository.likeById(post)  // из презентации
-
-    //fun onLikeButtonClickRepository(post: Post) = repository.likeById(post.id)
-    fun onShareClick(post: Post) = repository.share(post.shareCount)
-    fun onCreateActivity(post: Post) = repository.views(post.viewsCount)
+    val data = repository.get()
+    fun like(post: Post) = repository.likeById(post)
+    fun share(post: Post) = repository.share(post)
 
 }

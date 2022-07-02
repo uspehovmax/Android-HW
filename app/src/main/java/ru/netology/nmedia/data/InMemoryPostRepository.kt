@@ -6,12 +6,7 @@ import ru.netology.nmedia.dto.Post
 
 class InMemoryPostRepository : PostRepository {
 
-    private val posts
-        get() = checkNotNull(dataPost.value) {
-            "Data value should not be null"
-        }
-
-    override val dataPost = MutableLiveData(
+    private var posts =
         List(20) { index ->
             Post(
                 id = index + 1L,
@@ -24,52 +19,29 @@ class InMemoryPostRepository : PostRepository {
                 viewsCount = index * 7
             )
         }
-    )
 
-    override fun getAll(): LiveData<List<Post>> = dataPost
+    private val dataPost = MutableLiveData(posts)
+
+    override fun get(): LiveData<List<Post>> = dataPost
 
     override fun likeById(post: Post) {
-        dataPost.value = posts.map {
-            if (it.id != post.id) it
-            else it.copy(likedByMe = !it.likedByMe)
+        posts = posts.map {
+            if (it.id != post.id) {
+                it
+            } else if (it.id == post.id && !it.likedByMe) {
+                it.copy(likes = it.likes + 1, likedByMe = !it.likedByMe)
+            } else {
+                it.copy(likes = it.likes - 1, likedByMe = !it.likedByMe)
+            }
         }
+        dataPost.value = posts
     }
 
-    override fun share(shareCount: Int) {
-        dataPost.value = posts.map {
-            it.copy(shareCount = it.shareCount + 1)
+    override fun share(post: Post) {
+        posts = posts.map {
+            if (it.id != post.id) it else it.copy(shareCount = it.shareCount + 1)
         }
-    }
-
-    override fun views(viewsCount: Int) {
-        dataPost.value = posts.map {
-            it.copy(viewsCount = it.viewsCount + 1)
-        }
-    }
-
-    private fun likeCounter(post: Post): Int {
-        var likeCount = if (post.likedByMe) {
-            post.likes + 1
-        } else {
-            post.likes - 1
-        }
-        return likeCount
+        dataPost.value = posts
     }
 
 }
-/*
-    override val dataPost = MutableLiveData(
-        List(10) { index ->
-            Post(
-                id = index + 1L,
-                author = "Нетология. Университет...",
-                content = "Привет! Это новая Нетология...$index",
-                likes = 555,
-                published = "27.05.2025",
-                likedByMe = false,
-                shareCount = 1111999,
-                viewsCount = 444669
-            )
-        }
-    )
- */
