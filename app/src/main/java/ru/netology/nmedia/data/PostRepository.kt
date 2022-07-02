@@ -5,10 +5,13 @@ import ru.netology.nmedia.dto.Post
 
 interface PostRepository {
 
-    val dataPost: LiveData<List<Post>>
-    fun getAll(): LiveData<List<Post>>
-    fun likeById(post: Post)
-    fun share(shareCount: Int)
-    fun views(viewsCount: Int)
+    fun get(): LiveData<List<Post>>
+    fun like(post: Post)
+    fun share(post: Post)
+    fun delete(post: Post)
+    fun save(post: Post)
 
+    companion object {
+        const val NEW_POST_ID = 0L
+    }
 }

@@ -15,5 +15,15 @@
     <string name="viewsNumber" translatable="false">499999</string>
     <string name="AuthorName">Author</string>
     <string name="date" translatable="false">24.05.2022</string>
+    <string name="remove">/Remove</string>
+    <string name="edit">/Edit</string>
+    <string name="post_text">Text Post</string>
+    <string name="description"> SaveButton</string>
+    <string name="write_your_text_here" />
+    <string name="EditImage" />
+    <string name="edit_text" />
+    <string name="EditTextBottom" />
+    <string name="CancelEditButton" />
+    <string name="EditTextTop" />
 
 </resources>
