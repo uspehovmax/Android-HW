@@ -4,4 +4,6 @@
         android:title="@string/remove"/>
     <item android:id="@+id/edit"
         android:title="@string/edit"/>
+    <item android:id="@+id/insert"
+        android:title="@string/insert"/>
 </menu>

@@ -36,5 +36,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
         currentPost.value = post
     }
 
+    override fun onInsertClicked(post: Post) = repository.insert(post)
+
 }
 

@@ -84,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="contentEditText, editImageLeft, editCancelButton, editTextTop, editTextBottom, saveButton"
+        app:constraint_referenced_ids="editImageLeft, editCancelButton, editTextTop, editTextBottom"
         tools:visibility="visible">
     </androidx.constraintlayout.widget.Group>
 

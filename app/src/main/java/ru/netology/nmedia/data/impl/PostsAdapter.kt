@@ -44,15 +44,15 @@ class PostViewHolder(
         authorName.text = post.author
         date.text = post.published
         postText.text = post.content
-
-        likesNumber.text = getEdit(post.likes)
-        shareNumber.text = getEdit(post.shareCount)
-        viewsNumber.text = getEdit(post.viewsCount)
+        viewsNumber.text = post.viewsCount.toString()
 
         likesButton.setImageResource(
             if (post.likedByMe) R.drawable.ic_liked_24
             else R.drawable.ic_baseline_favorite_24
         )
+
+        shareNumber.text = getEdit(post.shareCount)
+        likesNumber.text = getEdit(post.likes)
 
         likesButton.setOnClickListener {
             listener.onLikeClicked(post)
@@ -75,12 +75,15 @@ class PostViewHolder(
                             listener.onEditClicked(post)
                             true
                         }
+                        R.id.insert -> {
+                            listener.onInsertClicked(post)
+                            true
+                        }
                         else -> false
                     }
                 }
             }.show()
         }
-
     }
 }
 

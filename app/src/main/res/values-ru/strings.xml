@@ -10,11 +10,12 @@
     <string name="remove">/Удалить</string>
     <string name="edit">/Редактировать</string>
     <string name="post_text">Текст поста</string>
-    <string name="description">Описание</string>
-    <string name="write_your_text_here" />
-    <string name="EditImage" />
-    <string name="edit_text" />
-    <string name="EditTextBottom" />
-    <string name="CancelEditButton" />
-    <string name="EditTextTop" />
+    <string name="description">Сохранить</string>
+    <string name="write_your_text_here" >Ваше сообщение</string>
+    <string name="EditImage" >Р.картинки</string>
+    <string name="edit_text" >Редактор текста</string>
+    <string name="EditTextBottom" >Р.текста кнопки</string>
+    <string name="CancelEditButton" >Отмена</string>
+    <string name="EditTextTop" >Р.тектса</string>
+    <string name="insert">/Вставить </string>
 </resources>

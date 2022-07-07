@@ -9,7 +9,7 @@ class InMemoryPostRepository : PostRepository {
     private var nextId = GENERATED_POST_AMOUNT.toLong()
 
     private companion object {
-        const val GENERATED_POST_AMOUNT = 100
+        const val GENERATED_POST_AMOUNT = 10
     }
 
     private var posts =
@@ -18,11 +18,11 @@ class InMemoryPostRepository : PostRepository {
                 id = index + 1L,
                 author = "Нетология. Университет...",
                 content = "Пост с номером $index",
-                likes = index * 50,
+                likes = index * 1,
                 published = "27.05.2025",
                 likedByMe = false,
-                shareCount = index * 500,
-                viewsCount = index * 1500
+                shareCount = index * 5,
+                viewsCount = index * 1
             )
         }
 
@@ -59,15 +59,14 @@ class InMemoryPostRepository : PostRepository {
         if (post.id == PostRepository.NEW_POST_ID) insert(post) else update(post)
     }
 
-    private fun insert(post: Post) {
+    override fun insert(post: Post) {
         posts = listOf(post.copy(id = ++nextId)) + posts
         dataPost.value = posts
     }
 
     private fun update(post: Post) {
-        posts = posts.map { if (it.id == post.id) post else it }
+        posts = posts.map { if (it.id == post.id) post.copy(viewsCount = it.viewsCount + 1) else it }
         dataPost.value = posts
     }
-
 
 }
