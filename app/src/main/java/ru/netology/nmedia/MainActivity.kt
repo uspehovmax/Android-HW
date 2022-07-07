@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
                     ).show()
                     return@setOnClickListener
                 }
-
                 val content = text.toString()
                 viewModel.onSaveButtonListener(content)
                 clearFocus()

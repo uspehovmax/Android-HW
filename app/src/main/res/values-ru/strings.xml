@@ -17,4 +17,6 @@
     <string name="EditTextBottom" />
     <string name="CancelEditButton" />
     <string name="EditTextTop" />
+    <string name="options_button" />
+    <string name="insert">/Встваить</string>
 </resources>

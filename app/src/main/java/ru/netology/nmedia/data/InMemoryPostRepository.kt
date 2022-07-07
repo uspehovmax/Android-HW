@@ -6,14 +6,14 @@ import ru.netology.nmedia.dto.Post
 
 class InMemoryPostRepository : PostRepository {
 
-    private var nextId = GENERATED_POST_AMOUNT.toLong()
-
-    private companion object {
-        const val GENERATED_POST_AMOUNT = 100
+    companion object {
+        const val POST_COUNTER = 30
     }
 
+    private var nextId = POST_COUNTER.toLong()
+
     private var posts =
-        List(GENERATED_POST_AMOUNT) { index ->
+        List(POST_COUNTER) { index ->
             Post(
                 id = index + 1L,
                 author = "Нетология. Университет...",
@@ -21,8 +21,8 @@ class InMemoryPostRepository : PostRepository {
                 likes = index * 50,
                 published = "27.05.2025",
                 likedByMe = false,
-                shareCount = index * 500,
-                viewsCount = index * 1500
+                shareCount = index * 5,
+                viewsCount = index * 10
             )
         }
 
@@ -50,6 +50,13 @@ class InMemoryPostRepository : PostRepository {
         dataPost.value = posts
     }
 
+    override fun views(post: Post) {
+        posts = posts.map {
+            if (it.id != post.id) it else it.copy(viewsCount = it.viewsCount + 1)
+        }
+        dataPost.value = posts
+    }
+
     override fun delete(post: Post) {
         posts = posts.filterNot { it.id == post.id }
         dataPost.value = posts
@@ -59,7 +66,7 @@ class InMemoryPostRepository : PostRepository {
         if (post.id == PostRepository.NEW_POST_ID) insert(post) else update(post)
     }
 
-    private fun insert(post: Post) {
+    override fun insert(post: Post) {
         posts = listOf(post.copy(id = ++nextId)) + posts
         dataPost.value = posts
     }
@@ -69,5 +76,9 @@ class InMemoryPostRepository : PostRepository {
         dataPost.value = posts
     }
 
-
 }
+
+
+/*
+
+ */

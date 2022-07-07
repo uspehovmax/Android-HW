@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.PostInteractionListener
+import ru.netology.nmedia.data.InMemoryPostRepository
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.getEdit
@@ -45,20 +46,17 @@ class PostViewHolder(
         date.text = post.published
         postText.text = post.content
 
-        likesNumber.text = getEdit(post.likes)
-        shareNumber.text = getEdit(post.shareCount)
-        viewsNumber.text = getEdit(post.viewsCount)
+        likesButton.isChecked = post.likedByMe
 
-        likesButton.setImageResource(
-            if (post.likedByMe) R.drawable.ic_liked_24
-            else R.drawable.ic_baseline_favorite_24
-        )
+        views.text = getEdit(post.viewsCount)
+        shareNumber.text = getEdit(post.shareCount)
+        likesButton.text = getEdit(post.likes)
 
         likesButton.setOnClickListener {
             listener.onLikeClicked(post)
         }
 
-        share.setOnClickListener {
+        shareNumber.setOnClickListener {
             listener.onShareClicked(post)
         }
 
@@ -75,10 +73,15 @@ class PostViewHolder(
                             listener.onEditClicked(post)
                             true
                         }
+                        R.id.insert -> {
+                            listener.onInsertClicked(post)
+                            true
+                        }
                         else -> false
                     }
                 }
             }.show()
+
         }
 
     }
@@ -94,5 +97,5 @@ private object DiffCallback : DiffUtil.ItemCallback<Post>() {
     }
 }
 
-
-
+/*
+ */
