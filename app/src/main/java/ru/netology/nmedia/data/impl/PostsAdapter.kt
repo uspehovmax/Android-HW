@@ -38,8 +38,6 @@ class PostsAdapter(
     }
 }
 
-}
-
 class PostViewHolder(
     private val binding: CardPostBinding,
     private val listener: PostInteractionListener
@@ -90,16 +88,6 @@ class PostViewHolder(
                 }
             }.show()
         }
-    }
-}
-
-private object DiffCallback : DiffUtil.ItemCallback<Post>() {
-    override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
-        return oldItem.id == newItem.id
-    }
-
-    override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
-        return oldItem == newItem
     }
 }
 
