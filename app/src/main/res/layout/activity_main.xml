@@ -12,13 +12,25 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/bottomEditBarrier"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="0dp"
         tools:listitem="@layout/card_post">
     </androidx.recyclerview.widget.RecyclerView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/SaveButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_baseline_add_48"
+        />
+
+    <!--
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/bottomTextBarrier"
         android:layout_height="wrap_content"
@@ -41,7 +53,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#CFC9C9"
-        android:hint=""
+        android:hint="Write here"
         android:importantForAutofill="no"
         android:inputType="textMultiLine"
         android:padding="8dp"
@@ -82,7 +94,7 @@
         app:layout_constraintBottom_toTopOf="@id/bottomTextBarrier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bottomEditBarrier"
-        app:srcCompat="@mipmap/ic_edit_close" />
+        app:srcCompat="@drawable/ic_edit_close_foreground" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/editGroup"
@@ -134,6 +146,9 @@
         app:layout_constraintStart_toEndOf="@id/editImageLeft"
         app:layout_constraintBottom_toTopOf="@id/bottomTextBarrier"
         tools:text="Message here"/>
+    -->
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

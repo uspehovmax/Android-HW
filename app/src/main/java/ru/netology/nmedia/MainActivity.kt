@@ -1,13 +1,13 @@
 package ru.netology.nmedia
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
+import ru.netology.nmedia.activity.PostContentActivity
 import ru.netology.nmedia.data.impl.PostsAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
-import ru.netology.nmedia.util.hideKeyboard
 import ru.netology.nmedia.viewModel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -24,41 +24,39 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(posts)
         }
 
-        binding.saveButton.setOnClickListener {
-            with(binding.contentEditText) {
-                if (text.isNullOrBlank()) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Text can't be empty",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@setOnClickListener
-                }
-                val content = text.toString()
-                viewModel.onSaveButtonListener(content)
-                clearFocus()
-                hideKeyboard()
-                binding.editGroup.visibility = View.GONE
+        binding.fab.setOnClickListener {
+            viewModel.onAddListener()
+        }
+
+        viewModel.sharePostContent.observe(this) { postContent ->
+            val intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, postContent)
+                type = "text/plain"
+            }
+            val shareIntent = Intent.createChooser(intent, getString(R.string.chooser_share_post))
+            startActivity(shareIntent)
+        }
+
+        viewModel.playVideo.observe(this) { videoUrl ->
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl))
+            if (intent.resolveActivity(packageManager) != null) {
+                startActivity(intent)
             }
         }
 
-        binding.editCancelButton.setOnClickListener {
-            viewModel.currentPost.value = null
-            binding.editGroup.visibility = View.GONE
+        val postContentActivityLauncher =
+            registerForActivityResult(PostContentActivity.ResultContract) { postContentAndVideo ->
+                postContentAndVideo ?: return@registerForActivityResult
+                viewModel.onSaveButtonListener(postContentAndVideo.newContent, postContentAndVideo.newVideoUrl)
+            }
+
+        viewModel.navigateToPostContentScreenEvent.observe(this) { postContentAndVideo ->
+            postContentActivityLauncher.launch(postContentAndVideo)
         }
 
-        viewModel.currentPost.observe(this) { currentPost ->
-            with(binding.contentEditText) {
-                val content = currentPost?.content
-                setText(content)
-                if (content != null) {
-                    requestFocus()
-                    binding.editGroup.visibility = View.VISIBLE
-                    binding.editTextBottom.text = content
-                }
-            }
-        }
     }
+
 }
 
 fun getEdit(numberLikes: Int): String {
@@ -78,3 +76,8 @@ fun getEdit(numberLikes: Int): String {
     }
     return number2digits.toString() + text
 }
+
+
+/*
+
+ */

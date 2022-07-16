@@ -19,4 +19,6 @@
     <string name="EditTextTop" />
     <string name="options_button" />
     <string name="insert">/Встваить</string>
+    <string name="SaveButton" />
+    <string name="chooser_share_post" />
 </resources>

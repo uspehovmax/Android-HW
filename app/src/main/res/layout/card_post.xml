@@ -83,11 +83,45 @@
             android:paddingTop="@dimen/common_spacing"
             android:paddingBottom="@dimen/common_spacing"
             android:text="@string/textPost"
+            android:autoLink="web"
             app:barrierMargin="@dimen/common_size"
-            app:layout_constraintBottom_toTopOf="@id/bottomBarrier"
+            app:layout_constraintBottom_toTopOf="@id/videoPreview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/headerBarrier" />
+
+        <View
+            android:id="@+id/videoPreview"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:background="@drawable/matrix"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@id/bottomBarrier"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/postText"
+            tools:text="Это видео файл" />
+
+        <View
+            android:id="@+id/videoButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/ic_play_48_foreground"
+            app:layout_constraintEnd_toEndOf="@id/videoPreview"
+            app:layout_constraintStart_toStartOf="@id/videoPreview"
+            app:layout_constraintTop_toTopOf="@id/videoPreview"
+            app:layout_constraintBottom_toBottomOf="@id/videoPreview"
+            tools:text="Play"/>
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/videoGroup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:constraint_referenced_ids="videoButton, videoPreview"
+            android:visibility="visible"
+            tools:visibility="visible"
+            />
+
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/bottomBarrier"
