@@ -17,7 +17,9 @@ import ru.netology.nmedia.viewModel.PostViewModel
 import java.nio.file.Files.delete
 
 class PostsAdapter(
+
     private val interactionListener: PostInteractionListener
+
 ) : ListAdapter<Post, PostViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
@@ -26,12 +28,15 @@ class PostsAdapter(
             parent,
             false
         )
+
         return PostViewHolder(binding, interactionListener)
+
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
+}
 
 }
 
@@ -44,6 +49,7 @@ class PostViewHolder(
         authorName.text = post.author
         date.text = post.published
         postText.text = post.content
+
         viewsNumber.text = post.viewsCount.toString()
 
         likesButton.setImageResource(
@@ -97,5 +103,12 @@ private object DiffCallback : DiffUtil.ItemCallback<Post>() {
     }
 }
 
+private object DiffCallback : DiffUtil.ItemCallback<Post>() {
+    override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
+        return oldItem.id == newItem.id
+    }
 
-
+    override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
+        return oldItem == newItem
+    }
+}

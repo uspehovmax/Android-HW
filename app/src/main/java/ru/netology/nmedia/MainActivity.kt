@@ -18,7 +18,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModel by viewModels<PostViewModel>()
+
         val adapter = PostsAdapter(viewModel)
+
         binding.postsRecyclerView.adapter = adapter
         viewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
@@ -77,5 +79,6 @@ fun getEdit(numberLikes: Int): String {
     } else {
         number2digits = numberLikes
     }
+
     return number2digits.toString() + text
 }

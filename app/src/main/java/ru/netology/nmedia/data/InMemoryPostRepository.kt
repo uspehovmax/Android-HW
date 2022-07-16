@@ -14,6 +14,7 @@ class InMemoryPostRepository : PostRepository {
 
     private var posts =
         List(GENERATED_POST_AMOUNT) { index ->
+
             Post(
                 id = index + 1L,
                 author = "Нетология. Университет...",
@@ -66,6 +67,7 @@ class InMemoryPostRepository : PostRepository {
 
     private fun update(post: Post) {
         posts = posts.map { if (it.id == post.id) post.copy(viewsCount = it.viewsCount + 1) else it }
+
         dataPost.value = posts
     }
 
