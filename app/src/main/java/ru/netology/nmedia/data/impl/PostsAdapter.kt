@@ -2,20 +2,24 @@ package ru.netology.nmedia.data.impl
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.annotation.DrawableRes
 import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
+import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.getEdit
 import ru.netology.nmedia.viewModel.PostViewModel
+import java.nio.file.Files.delete
 
 class PostsAdapter(
-    private val onLikeListener: (Post) -> Unit,
-    private val onShareListener: (Post) -> Unit,
+
+    private val interactionListener: PostInteractionListener
+
 ) : ListAdapter<Post, PostViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
@@ -24,7 +28,9 @@ class PostsAdapter(
             parent,
             false
         )
-        return PostViewHolder(binding, onLikeListener, onShareListener)
+
+        return PostViewHolder(binding, interactionListener)
+
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
@@ -34,28 +40,53 @@ class PostsAdapter(
 
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val onLikeViewHolderListener: (Post) -> Unit,
-    private val onShareViewHolderListener: (Post) -> Unit,
-    ) : RecyclerView.ViewHolder(binding.root) {
+    private val listener: PostInteractionListener
+) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(post: Post) = with(binding) {
         authorName.text = post.author
         date.text = post.published
         postText.text = post.content
 
-        likesNumber.text = getEdit(post.likes)
-        shareNumber.text = getEdit(post.shareCount)
-        viewsNumber.text = getEdit(post.viewsCount)
+        viewsNumber.text = post.viewsCount.toString()
 
         likesButton.setImageResource(
             if (post.likedByMe) R.drawable.ic_liked_24
             else R.drawable.ic_baseline_favorite_24
         )
+
+        shareNumber.text = getEdit(post.shareCount)
+        likesNumber.text = getEdit(post.likes)
+
         likesButton.setOnClickListener {
-            onLikeViewHolderListener(post)
+            listener.onLikeClicked(post)
         }
+
         share.setOnClickListener {
-            onShareViewHolderListener(post)
+            listener.onShareClicked(post)
+        }
+
+        options.setOnClickListener {
+            PopupMenu(it.context, it).apply {
+                inflate(R.menu.option_post)
+                setOnMenuItemClickListener { item ->
+                    when (item.itemId) {
+                        R.id.remove -> {
+                            listener.onRemoveClicked(post)
+                            true
+                        }
+                        R.id.edit -> {
+                            listener.onEditClicked(post)
+                            true
+                        }
+                        R.id.insert -> {
+                            listener.onInsertClicked(post)
+                            true
+                        }
+                        else -> false
+                    }
+                }
+            }.show()
         }
     }
 }
