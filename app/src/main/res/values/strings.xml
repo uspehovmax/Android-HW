@@ -18,13 +18,13 @@
     <string name="remove">/Remove</string>
     <string name="edit">/Edit</string>
     <string name="post_text">Text Post</string>
-    <string name="description">SaveButton</string>
-    <string name="write_your_text_here" />
+    <string name="description"> SaveButton</string>
+    <string name="write_your_text_here"> Write_your_text_here</string>
     <string name="EditImage" />
-    <string name="edit_text" />
+    <string name="edit_text"> Write_your_text_here</string>
     <string name="EditTextBottom" />
     <string name="CancelEditButton" />
     <string name="EditTextTop" />
+    <string name="options_button" />
     <string name="insert">/Insert</string>
-
 </resources>

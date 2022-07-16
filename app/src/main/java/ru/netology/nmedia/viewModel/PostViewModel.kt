@@ -39,5 +39,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
 
     override fun onInsertClicked(post: Post) = repository.insert(post)
 
-}
+    fun onViews(post: Post) = repository.views(post)
 
+
+}
