@@ -18,7 +18,9 @@ import ru.netology.nmedia.viewModel.PostViewModel
 import java.nio.file.Files.delete
 
 class PostsAdapter(
+
     private val interactionListener: PostInteractionListener
+
 ) : ListAdapter<Post, PostViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
@@ -27,13 +29,14 @@ class PostsAdapter(
             parent,
             false
         )
+
         return PostViewHolder(binding, interactionListener)
+
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
-
 }
 
 class PostViewHolder(
@@ -45,12 +48,13 @@ class PostViewHolder(
         authorName.text = post.author
         date.text = post.published
         postText.text = post.content
-
         likesButton.isChecked = post.likedByMe
-
         views.text = getEdit(post.viewsCount)
         shareNumber.text = getEdit(post.shareCount)
         likesButton.text = getEdit(post.likes)
+
+        shareNumber.text = getEdit(post.shareCount)
+        likesNumber.text = getEdit(post.likes)
 
         likesButton.setOnClickListener {
             listener.onLikeClicked(post)
@@ -83,7 +87,6 @@ class PostViewHolder(
             }.show()
 
         }
-
     }
 }
 
@@ -97,5 +100,3 @@ private object DiffCallback : DiffUtil.ItemCallback<Post>() {
     }
 }
 
-/*
- */

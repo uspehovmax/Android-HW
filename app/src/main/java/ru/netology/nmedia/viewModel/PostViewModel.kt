@@ -11,6 +11,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
 
     private val repository: PostRepository = InMemoryPostRepository()
     val data = repository.get()
+
     val currentPost = MutableLiveData<Post?>(null)
 
     fun onSaveButtonListener(content: String) {
@@ -40,8 +41,5 @@ class PostViewModel : ViewModel(), PostInteractionListener {
 
     fun onViews(post: Post) = repository.views(post)
 
+
 }
-
-/*
-
- */

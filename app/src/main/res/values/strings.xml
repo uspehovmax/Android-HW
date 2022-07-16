@@ -12,7 +12,7 @@
    ]]></string>
     <string name="likesNumber" translatable="false">999</string>
     <string name="shareNumber" translatable="false">666666</string>
-    <string name="viewsNumber" translatable="false">499999</string>
+    <string name="viewsNumber" translatable="false">50</string>
     <string name="AuthorName">Author</string>
     <string name="date" translatable="false">24.05.2022</string>
     <string name="remove">/Remove</string>
@@ -27,5 +27,4 @@
     <string name="EditTextTop" />
     <string name="options_button" />
     <string name="insert">/Insert</string>
-
 </resources>
