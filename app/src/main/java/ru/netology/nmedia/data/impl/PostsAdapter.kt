@@ -52,9 +52,7 @@ class PostViewHolder(
         views.text = getEdit(post.viewsCount)
         shareNumber.text = getEdit(post.shareCount)
         likesButton.text = getEdit(post.likes)
-
         shareNumber.text = getEdit(post.shareCount)
-        likesNumber.text = getEdit(post.likes)
 
         likesButton.setOnClickListener {
             listener.onLikeClicked(post)
