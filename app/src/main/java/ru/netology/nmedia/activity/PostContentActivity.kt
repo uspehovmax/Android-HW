@@ -28,7 +28,6 @@ class PostContentActivity : AppCompatActivity() {
             } else {
                 if(binding.link.text.isNotBlank()) {
                     val url = binding.link.text.toString()
-
                     outIntent.putExtra("url", url)
                 }
                 val content = binding.edit.text.toString()
@@ -41,7 +40,6 @@ class PostContentActivity : AppCompatActivity() {
         binding.cancel.setOnClickListener{
             finish()
         }
-
     }
 
     class EditPostResult(
