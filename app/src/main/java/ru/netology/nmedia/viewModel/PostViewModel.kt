@@ -61,8 +61,4 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     fun onAddListener() {
         navigateToPostContentScreenEvent.call()
     }
-
-}
-
-
 }
