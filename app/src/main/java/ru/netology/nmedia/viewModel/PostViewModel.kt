@@ -13,6 +13,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
 
     private val repository: PostRepository = InMemoryPostRepository()
     val data = repository.get()
+
     val currentPost = MutableLiveData<Post?>(null)
     val sharePostContent = SingleLiveEvent<String>()
     val navigateToPostContentScreenEvent = SingleLiveEvent<PostContentActivity.EditPostResult?>()
@@ -51,6 +52,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
 
     fun onViews(post: Post) = repository.views(post)
 
+
     override fun onVideoPlayClicked(post: Post) {
         val url = requireNotNull(post.video)
         playVideo.value = url
@@ -62,6 +64,5 @@ class PostViewModel : ViewModel(), PostInteractionListener {
 
 }
 
-/*
 
- */
+}

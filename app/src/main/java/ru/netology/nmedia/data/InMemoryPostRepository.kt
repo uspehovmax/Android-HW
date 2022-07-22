@@ -18,7 +18,7 @@ class InMemoryPostRepository : PostRepository {
                 id = index + 1L,
                 author = "Нетология. Университет...",
                 content = "Пост с номером $index",
-                likes = index * 50,
+                likes = index * 1,
                 published = "27.05.2025",
                 likedByMe = false,
                 shareCount = index * 5,
@@ -73,13 +73,9 @@ class InMemoryPostRepository : PostRepository {
     }
 
     private fun update(post: Post) {
-        posts = posts.map { if (it.id == post.id) post else it }
+        posts = posts.map { if (it.id == post.id) post.copy(viewsCount = it.viewsCount + 1) else it }
+
         dataPost.value = posts
     }
 
 }
-
-
-/*
-
- */
