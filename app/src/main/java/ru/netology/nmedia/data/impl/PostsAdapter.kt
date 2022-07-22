@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.annotation.DrawableRes
+import androidx.core.view.isVisible
 import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -49,6 +50,9 @@ class PostViewHolder(
         date.text = post.published
         postText.text = post.content
         likesButton.isChecked = post.likedByMe
+
+        videoGroup.isVisible = post.video != null
+
         views.text = getEdit(post.viewsCount)
         shareNumber.text = getEdit(post.shareCount)
         likesButton.text = getEdit(post.likes)
@@ -60,6 +64,10 @@ class PostViewHolder(
 
         shareNumber.setOnClickListener {
             listener.onShareClicked(post)
+        }
+
+        videoPreview.setOnClickListener {
+            listener.onVideoPlayClicked(post)
         }
 
         options.setOnClickListener {

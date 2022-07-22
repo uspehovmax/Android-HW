@@ -7,7 +7,7 @@ import ru.netology.nmedia.dto.Post
 class InMemoryPostRepository : PostRepository {
 
     companion object {
-        const val POST_COUNTER = 30
+        const val POST_COUNTER = 10
     }
 
     private var nextId = POST_COUNTER.toLong()
@@ -22,7 +22,8 @@ class InMemoryPostRepository : PostRepository {
                 published = "27.05.2025",
                 likedByMe = false,
                 shareCount = index * 5,
-                viewsCount = index * 10
+                viewsCount = index * 10 ,
+                video = "https://www.youtube.com/watch?v=2AWcWODemB8"
             )
         }
 
