@@ -2,9 +2,10 @@ package ru.netology.nmedia.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import ru.netology.nmedia.data.impl.PostRepositoryFileImpl
 import ru.netology.nmedia.dto.Post
 
-class InMemoryPostRepository : PostRepository {
+class InMemoryPostRepository : PostRepository { //PostRepositoryFileImpl(application)
 
     companion object {
         const val POST_COUNTER = 10
