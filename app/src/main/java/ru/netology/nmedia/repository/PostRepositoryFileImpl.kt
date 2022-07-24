@@ -1,4 +1,4 @@
-package ru.netology.nmedia.data.impl
+package ru.netology.nmedia.repository
 
 import android.content.Context
 import android.widget.Toast
@@ -6,8 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import ru.netology.nmedia.data.PostRepository
-import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.data.Post
 
 class PostRepositoryFileImpl(private val context: Context) : PostRepository {
     private val gson = Gson()
@@ -71,6 +70,14 @@ class PostRepositoryFileImpl(private val context: Context) : PostRepository {
         sync()
     }
 
+    override fun views(post: Post) {
+        posts = posts.map {
+            if (it.id != post.id) it else it.copy(viewsCount = it.viewsCount + 1)
+        }
+        data.value = posts
+        sync()
+    }
+
     override fun save(post: Post) {
         if (post.id == PostRepository.NEW_POST_ID) insert(post) else update(post)
     }
@@ -92,10 +99,6 @@ class PostRepositoryFileImpl(private val context: Context) : PostRepository {
         posts = posts.map { if (it.id == post.id) post else it }
         data.value = posts
         sync()
-    }
-
-    override fun views(post: Post) {
-        //
     }
 
 }

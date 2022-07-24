@@ -1,7 +1,7 @@
-package ru.netology.nmedia.data
+package ru.netology.nmedia.repository
 
 import androidx.lifecycle.LiveData
-import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.data.Post
 
 interface PostRepository {
 
@@ -17,6 +17,3 @@ interface PostRepository {
         const val NEW_POST_ID = 0L
     }
 }
-/*
-
- */

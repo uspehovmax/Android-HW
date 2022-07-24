@@ -1,37 +1,30 @@
-package ru.netology.nmedia.data
+package ru.netology.nmedia.repository
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.netology.nmedia.data.impl.PostRepositoryFileImpl
-import ru.netology.nmedia.dto.Post
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import ru.netology.nmedia.data.Post
 
-class InMemoryPostRepository : PostRepository { //PostRepositoryFileImpl(application)
+class PostRepositorySharedPrefsImpl(context: Context) : PostRepository {
 
-    companion object {
-        const val POST_COUNTER = 10
+    private val json = Gson()
+    private val prefs = context.getSharedPreferences("repo", Context.MODE_PRIVATE)
+    private val type = TypeToken.getParameterized(List::class.java, Post::class.java).type
+    private val key = "posts"
+    private var nextId = 1L
+    private var posts = emptyList<Post>()
+    private val data = MutableLiveData(posts)
+
+    init {
+        prefs.getString(key, null)?.let {
+            posts = json.fromJson(it, type)
+            data.value = posts
+        }
     }
 
-    private var nextId = POST_COUNTER.toLong()
-
-    private var posts =
-        List(POST_COUNTER) { index ->
-            Post(
-                id = index + 1L,
-                author = "Нетология. Университет...",
-                content = "Пост с номером $index",
-                likes = index * 50,
-                published = "27.05.2025",
-                likedByMe = false,
-                shareCount = index * 5,
-                viewsCount = index * 10 ,
-                video = "https://www.youtube.com/watch?v=2AWcWODemB8"
-            )
-        }
-
-    private val dataPost = MutableLiveData(posts)
-
-    override fun get(): LiveData<List<Post>> = dataPost
-
+    override fun get(): LiveData<List<Post>> = data
     override fun like(post: Post) {
         posts = posts.map {
             if (it.id != post.id) {
@@ -42,26 +35,30 @@ class InMemoryPostRepository : PostRepository { //PostRepositoryFileImpl(applica
                 it.copy(likes = it.likes - 1, likedByMe = !it.likedByMe)
             }
         }
-        dataPost.value = posts
+        data.value = posts
+        sync()
     }
 
     override fun share(post: Post) {
         posts = posts.map {
             if (it.id != post.id) it else it.copy(shareCount = it.shareCount + 1)
         }
-        dataPost.value = posts
+        data.value = posts
+        sync()
     }
 
     override fun views(post: Post) {
         posts = posts.map {
             if (it.id != post.id) it else it.copy(viewsCount = it.viewsCount + 1)
         }
-        dataPost.value = posts
-    }
+        data.value = posts
+        sync()
+        }
 
     override fun delete(post: Post) {
         posts = posts.filterNot { it.id == post.id }
-        dataPost.value = posts
+        data.value = posts
+        sync()
     }
 
     override fun save(post: Post) {
@@ -70,17 +67,21 @@ class InMemoryPostRepository : PostRepository { //PostRepositoryFileImpl(applica
 
     override fun insert(post: Post) {
         posts = listOf(post.copy(id = ++nextId)) + posts
-        dataPost.value = posts
+        data.value = posts
+        sync()
     }
 
     private fun update(post: Post) {
         posts = posts.map { if (it.id == post.id) post else it }
-        dataPost.value = posts
+        data.value = posts
+        sync()
+    }
+
+    private fun sync() {
+        with(prefs.edit()) {
+            putString(key, json.toJson(posts))
+            apply()
+        }
     }
 
 }
-
-
-/*
-
- */

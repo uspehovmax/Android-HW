@@ -1,22 +1,17 @@
-package ru.netology.nmedia.data.impl
+package ru.netology.nmedia.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import androidx.annotation.DrawableRes
 import androidx.core.view.isVisible
-import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
-import ru.netology.nmedia.adapter.PostInteractionListener
-import ru.netology.nmedia.data.InMemoryPostRepository
+import ru.netology.nmedia.data.Post
+import ru.netology.nmedia.data.PostInteractionListener
+import ru.netology.nmedia.data.counter
 import ru.netology.nmedia.databinding.CardPostBinding
-import ru.netology.nmedia.dto.Post
-import ru.netology.nmedia.getEdit
-import ru.netology.nmedia.viewModel.PostViewModel
-import java.nio.file.Files.delete
 
 class PostsAdapter(
     private val interactionListener: PostInteractionListener
@@ -49,9 +44,9 @@ class PostViewHolder(
         likesButton.isChecked = post.likedByMe
         videoGroup.isVisible = post.video != null
 
-        views.text = getEdit(post.viewsCount)
-        shareNumber.text = getEdit(post.shareCount)
-        likesButton.text = getEdit(post.likes)
+        views.text = counter(post.viewsCount)
+        shareNumber.text = counter(post.shareCount)
+        likesButton.text = counter(post.likes)
 
         likesButton.setOnClickListener {
             listener.onLikeClicked(post)
@@ -63,6 +58,10 @@ class PostViewHolder(
 
         videoPreview.setOnClickListener {
             listener.onVideoPlayClicked(post)
+        }
+
+        postText.setOnClickListener {
+            listener.onPostClicked(post)
         }
 
         options.setOnClickListener {
@@ -86,9 +85,7 @@ class PostViewHolder(
                     }
                 }
             }.show()
-
         }
-
     }
 }
 
@@ -102,6 +99,3 @@ private object DiffCallback : DiffUtil.ItemCallback<Post>() {
     }
 }
 
-/*
-
- */
